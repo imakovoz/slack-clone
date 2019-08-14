@@ -4,6 +4,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./models/data');
+const mongo_pass = require('../secrets');
 
 const API_PORT = 3001;
 const app = express();
@@ -12,7 +13,7 @@ const router = express.Router();
 
 // this is our MongoDB database
 const dbRoute =
-  'mongodb+srv://imakovoz:testthisroot@cluster0-0j27x.mongodb.net/test?retryWrites=true&w=majority';
+  `mongodb+srv://imakovoz:${mongo_pass}@cluster0-0j27x.mongodb.net/test?retryWrites=true&w=majority`;
 
 // connects our back end code with the database
 mongoose.connect(dbRoute, { useNewUrlParser: true });
