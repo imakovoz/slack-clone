@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const logger = require('morgan');
 const Data = require('./models/data');
 const mongo_pass = require('../secrets');
+var userRoute = require('./routes/user');
 
 const API_PORT = 3001;
 const app = express();
@@ -39,6 +40,8 @@ router.get('/getData', (req, res) => {
     return res.json({ success: true, data: data });
   });
 });
+
+
 
 // this is our update method
 // this method overwrites existing data in our database
@@ -86,3 +89,4 @@ app.use('/api', router);
 
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+userRoute(router)
