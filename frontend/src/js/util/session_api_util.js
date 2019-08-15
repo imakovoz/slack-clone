@@ -1,9 +1,14 @@
+import axios from 'axios';
+
 export const signup = (user) => {
-  return $.ajax({
-    method: 'POST',
-    url: 'http://localhost:3001/api/users',
+  return axios.post('http://localhost:3001/api/users', {
     data: user,
   });
+  // return $.ajax({
+  //   method: 'POST',
+  //   url: 'http://localhost:3001/api/users',
+  //   data: user,
+  // });
 };
 
 export const login = (user) => {

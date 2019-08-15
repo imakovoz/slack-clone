@@ -6,9 +6,10 @@ const DataSchema = new Schema(
   {
     id: Number,
     status: String,
-    firstName: String,
-    lastName: String,
-    userName: String,
+    firstname: String,
+    lastname: String,
+    email: String,
+    password: String,
     threadsJoined: Array,
     messages: Array
   },
@@ -16,4 +17,4 @@ const DataSchema = new Schema(
 );
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model("Data", DataSchema);
+module.exports = mongoose.model("User", DataSchema);

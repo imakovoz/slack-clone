@@ -1,0 +1,124 @@
+.LoginPage {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid white;
+  font-size: 20px;
+  margin: 20px 0px;
+}
+
+h1 {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  color: #004e87;
+}
+
+#header-div {
+  margin: 9px;
+}
+
+#SessionPageForm {
+  // background-image: image_url("DBbackground.png");
+  height: 100vh;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Roboto", sans-serif;
+}
+
+#SessionForm {
+  display: flex;
+  justify-content: baseline;
+  flex-direction: column;
+  height: 500px;
+  padding: 0 50px;
+}
+
+#SessionForm > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0px 50px;
+}
+
+#SessionPageForm > * {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#SessionPageHeader {
+  padding: 20px 30px;
+  font-size: 25px;
+  width: 340px;
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+  background-color: black;
+  font-weight: 300;
+}
+
+.SessionFormInputs {
+  width: 300px;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 1px solid #cccc;
+  font-size: 14px;
+  color: white;
+}
+
+.SessionFormInputs:focus {
+  background-color: white;
+  color: black;
+}
+
+#sign-up-submit {
+  border: 1px solid white;
+  box-sizing: border-box;
+  background-color: #004e87;
+
+  margin-top: 50px;
+  padding: 15px;
+  color: white;
+  font-size: 16px;
+}
+
+#log-in-link {
+  text-decoration: none;
+  padding: 7px 8px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  margin-left: 10px;
+  color: #aaa;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#sign-up-link {
+  text-decoration: none;
+  padding: 8px 9px;
+  margin-left: 10px;
+  background-color: #004e87;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#demo-login {
+  background-color: #3b5998;
+}
+
+.session-errs {
+  padding: 2px;
+  color: red;
+  margin: 0 auto;
+}
+
+#login-errors {
+  width: 380px;
+  padding: 10px;
+  background: red;
+  color: white;
+  text-align: center;
+}

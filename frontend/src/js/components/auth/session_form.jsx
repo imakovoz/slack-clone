@@ -50,7 +50,11 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm({ user });
+    if (this.props.formType === "signup") {
+      this.props.signup({ user });
+    } else {
+      this.props.login({ user });
+    }
   }
 
   render() {
@@ -73,7 +77,7 @@ class SessionForm extends React.Component {
           </header>
           <div id="SessionPageForm">
             <section id="SessionPageHeader">
-              Contribute to Demandbase solutions
+              Join the Slacker community
             </section>
             <form onSubmit={this.handleSubmit} id="SessionForm">
               <input
