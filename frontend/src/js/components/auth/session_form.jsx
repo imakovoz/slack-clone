@@ -76,9 +76,7 @@ class SessionForm extends React.Component {
             </div>
           </header>
           <div id="SessionPageForm">
-            <section id="SessionPageHeader">
-              Join the Slacker community
-            </section>
+            <section id="SessionPageHeader">Join the Slacker community</section>
             <form onSubmit={this.handleSubmit} id="SessionForm">
               <input
                 type="text"
