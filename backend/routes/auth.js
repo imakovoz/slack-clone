@@ -1,3 +1,5 @@
+var crypto = require("crypto");
+
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
@@ -35,6 +37,7 @@ module.exports = function(router) {
         user.email = email;
         user.id = id;
         user.password = hash;
+        user.sessionToken = crypto.randomBytes(20).toString("hex");
         console.log(req.body.data.user);
         console.log(user);
         user.save(err => {

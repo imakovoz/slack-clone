@@ -51,9 +51,19 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     if (this.props.formType === "signup") {
-      this.props.signup({ user });
+      this.props.signup({ user }).then(res => {
+        sessionStorage.setItem(
+          "sessionToken",
+          res.currentUser.data.currentUser.sessionToken
+        );
+      });
     } else {
-      this.props.login({ user });
+      this.props.login({ user }).then(res => {
+        sessionStorage.setItem(
+          "sessionToken",
+          res.currentUser.data.currentUser.sessionToken
+        );
+      });
     }
   }
 

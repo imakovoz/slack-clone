@@ -11,7 +11,8 @@ const DataSchema = new Schema(
     email: String,
     password: String,
     threadsJoined: Array,
-    messages: Array
+    messages: Array,
+    sessionToken: String
   },
   { timestamps: true }
 );
