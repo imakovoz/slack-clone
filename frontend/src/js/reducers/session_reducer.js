@@ -6,11 +6,11 @@ const sessionReducer = (state = { current_user: null }, action) => {
 
   switch (action.type) {
     case RECEIVE_CURRENT_USER:
-      debugger;
-      return merge(
-        {},
-        { currentUser: JSON.parse(action.currentUser.config.data).data.user }
+      localStorage.setItem(
+        "sessionToken",
+        action.currentUser.data.currentUser.sessionToken
       );
+      return merge({}, { currentUser: action.currentUser.data.currentUser });
     default:
       return state;
   }

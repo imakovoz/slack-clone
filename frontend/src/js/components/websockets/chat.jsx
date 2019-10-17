@@ -13,16 +13,6 @@ class Chat extends React.Component {
     this.handleText = this.handleText.bind(this);
   }
 
-  // componentDidMount() {
-  //   // console.log(this.props);
-  //   // debugger;
-  //   const { websocket } = this.props;
-  //   try {
-  //     websocket.send(this.props.currentUser.email); //send data to the server
-  //   } catch (error) {
-  //     console.log(error); // catch error
-  //   }
-  // }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.websocket === null && this.props.websocket !== null) {
       const { websocket } = this.props;

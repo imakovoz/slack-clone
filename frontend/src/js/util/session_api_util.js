@@ -7,7 +7,6 @@ export const signup = user => {
 };
 
 export const login = user => {
-  console.log(user);
   return axios.post("http://localhost:3001/api/auth/login", {
     data: user
   });
