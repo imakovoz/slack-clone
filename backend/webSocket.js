@@ -1,5 +1,27 @@
+const mongoose = require("mongoose");
+const express = require("express");
+var cors = require("cors");
+const bodyParser = require("body-parser");
+const logger = require("morgan");
+const Data = require("./models/data");
+
+const webSocketServer = require("websocket").server;
+const http = require("http");
+
 // http://ejohn.org/blog/ecmascript-5-strict-mode-json-and-more/
-"use strict";
+("use strict");
+
+const dbRoute = `mongodb+srv://test:testthisroot@cluster0-0j27x.mongodb.net/test?retryWrites=true&w=majority`;
+
+// connects our back end code with the database
+mongoose.connect(dbRoute, { useNewUrlParser: true });
+
+let db = mongoose.connection;
+
+db.once("open", () => console.log("connected to the database"));
+
+// checks if connection with the database is successful
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // Optional. You will see this name in eg. 'ps' or 'top' command
 process.title = "node-chat";
@@ -8,8 +30,6 @@ process.title = "node-chat";
 var webSocketsServerPort = 1337;
 
 // websocket and http servers
-var webSocketServer = require("websocket").server;
-var http = require("http");
 
 /**
  * Global variables

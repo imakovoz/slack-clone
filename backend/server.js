@@ -12,7 +12,6 @@ const API_PORT = 3001;
 const app = express();
 app.use(cors());
 const router = express.Router();
-console.log(mongo_pass);
 // this is our MongoDB database
 const dbRoute = `mongodb+srv://test:testthisroot@cluster0-0j27x.mongodb.net/test?retryWrites=true&w=majority`;
 
