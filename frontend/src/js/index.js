@@ -8,21 +8,50 @@ import axios from "axios";
 import Root from "./components/root.jsx";
 
 document.addEventListener("DOMContentLoaded", () => {
-  axios.get("http://localhost:3001/api/auth/checkLogin", {
-    data: localStorage.getItem("sessionToken")
-  });
+  var sessionToken1 = localStorage.getItem("sessionToken");
+  if (sessionToken1) {
+    axios
+      .post("http://localhost:3001/api/auth/checkLogin", {
+        data: sessionToken1
+      })
+      .then(
+        response => {
+          window.currentUser = response.data.currentUser;
+        },
+        error => {
+          console.log(`error${error}`);
+        }
+      )
+      .then(e => {
+        let store;
+        if (window.currentUser) {
+          const preloadedState = {
+            session: { currentUser: window.currentUser }
+          };
+          store = configureStore(preloadedState);
+          delete window.currentUser;
+        } else {
+          store = configureStore();
+        }
 
-  // debugger;
-
-  let store;
-  if (window.currentUser) {
-    const preloadedState = { session: { currentUser: window.currentUser } };
-    store = configureStore(preloadedState);
-    delete window.currentUser;
+        const root = document.getElementById("app");
+        ReactDOM.render(<Root store={store} />, root);
+      });
   } else {
-    store = configureStore();
+    let store;
+    if (window.currentUser) {
+      const preloadedState = {
+        session: { currentUser: window.currentUser }
+      };
+      store = configureStore(preloadedState);
+      delete window.currentUser;
+    } else {
+      store = configureStore();
+    }
+
+    const root = document.getElementById("app");
+    ReactDOM.render(<Root store={store} />, root);
   }
 
-  const root = document.getElementById("app");
-  ReactDOM.render(<Root store={store} />, root);
+  // debugger;
 });

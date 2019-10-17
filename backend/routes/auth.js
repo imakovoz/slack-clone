@@ -38,8 +38,16 @@ module.exports = function(router) {
     });
   });
 
-  router.get("/auth/checkLogin", (req, res) => {
-    console.log(req.body.data);
+  router.post("/auth/checkLogin", (req, res) => {
+    if (req.body.data) {
+      User.findOne({ sessionToken: req.body.data }, function(err, result) {
+        if (result !== null) {
+          return res.json({ currentUser: result });
+        } else {
+          console.log("fail");
+        }
+      });
+    }
   });
 
   router.post("/auth/signup", (req, res) => {
