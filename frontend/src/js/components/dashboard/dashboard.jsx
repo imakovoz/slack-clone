@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import $ from "jquery";
 import Chat from "./chat.jsx";
 import ChatHistory from "./chatHistory.jsx";
 
@@ -25,7 +24,8 @@ class Dashboard extends React.Component {
         <ChatHistory
           websocket={this.props.websocket}
           currentUser={this.props.currentUser}
-          history={this.props.history}
+          chatHistory={this.props.chatHistory}
+          users={this.props.users}
         />
         <Chat
           websocket={this.props.websocket}

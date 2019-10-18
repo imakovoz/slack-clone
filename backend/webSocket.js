@@ -70,6 +70,12 @@ wsServer.on("request", function(request) {
   // (http://en.wikipedia.org/wiki/Same_origin_policy)
   var connection = request.accept(null, request.origin);
   var index = clients.push(connection) - 1;
+  Message.find({}, (err, res) => {
+    console.log(res);
+    var json = JSON.stringify({ type: "message", data: res });
+
+    clients[index].sendUTF(json);
+  });
   console.log(new Date() + " Connection accepted.");
 
   // user sent some message

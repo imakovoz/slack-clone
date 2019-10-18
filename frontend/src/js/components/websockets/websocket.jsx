@@ -2,20 +2,22 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import Dashboard from "../dashboard/dashboard.jsx";
 
-class Main extends React.Component {
+class WebsocketClass extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       ws: null,
-      history: []
+      chatHistory: ["test"]
     };
+    console.log(this);
   }
 
   // single websocket instance for the own application and constantly trying to reconnect.
 
   componentDidMount() {
-    this.connect();
+    this.props.fetchUsers().then(() => {
+      this.connect();
+    });
   }
 
   // timeout = 250; // Initial timeout duration as a class variable
@@ -67,12 +69,11 @@ class Main extends React.Component {
     ws.onmessage = e => {
       try {
         var json = JSON.parse(e.data);
-        this.setState({ history: json.data });
+        this.setState({ chatHistory: json.data });
       } catch (e) {
         console.log("Invalid JSON: ", e.data);
         return;
       }
-      console.log(json);
     };
   }
 
@@ -87,12 +88,13 @@ class Main extends React.Component {
   render() {
     return (
       <Dashboard
-        history={this.state.history}
+        chatHistory={this.state.chatHistory}
         websocket={this.state.ws}
         currentUser={this.props.currentUser}
+        users={this.props.users}
       />
     );
   }
 }
 
-export default withRouter(Main);
+export default withRouter(WebsocketClass);
