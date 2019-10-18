@@ -3,7 +3,7 @@ const express = require("express");
 var cors = require("cors");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
-const Data = require("./models/data");
+const Message = require("./models/message");
 
 const webSocketServer = require("websocket").server;
 const http = require("http");
@@ -40,24 +40,6 @@ var history = [];
 var clients = [];
 
 /**
- * Helper function for escaping input strings
- */
-function htmlEntities(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-}
-
-// Array with some colors
-var colors = ["red", "green", "blue", "magenta", "purple", "plum", "orange"];
-// ... in random order
-colors.sort(function(a, b) {
-  return Math.random() > 0.5;
-});
-
-/**
  * HTTP server
  */
 var server = http.createServer(function(request, response) {
@@ -87,76 +69,35 @@ wsServer.on("request", function(request) {
   // client is connecting from your website
   // (http://en.wikipedia.org/wiki/Same_origin_policy)
   var connection = request.accept(null, request.origin);
-  // we need to know client index to remove them on 'close' event
   var index = clients.push(connection) - 1;
-  var userName = false;
-  var userColor = false;
-
   console.log(new Date() + " Connection accepted.");
-
-  // send back chat history
-  if (history.length > 0) {
-    connection.sendUTF(JSON.stringify({ type: "history", data: history }));
-  }
 
   // user sent some message
   connection.on("message", function(message) {
-    if (message.type === "utf8") {
-      // accept only text
-      if (userName === false) {
-        // first message sent by user is their name
-        // remember user name
-        userName = htmlEntities(message.utf8Data);
-        // get random color and send it back to the user
-        userColor = colors.shift();
-        connection.sendUTF(JSON.stringify({ type: "color", data: userColor }));
-        console.log(
-          new Date() +
-            " User is known as: " +
-            userName +
-            " with " +
-            userColor +
-            " color."
-        );
-      } else {
-        // log and broadcast the message
-        console.log(
-          new Date() +
-            " Received Message from " +
-            userName +
-            ": " +
-            message.utf8Data
-        );
+    message = JSON.parse(message.utf8Data);
+    var { currentUser, text } = message;
 
-        // we want to keep history of all sent messages
-        var obj = {
-          time: new Date().getTime(),
-          text: htmlEntities(message.utf8Data),
-          author: userName,
-          color: userColor
-        };
-        history.push(obj);
-        history = history.slice(-100);
-
-        // broadcast message to all connected clients
-        var json = JSON.stringify({ type: "message", data: obj });
-        for (var i = 0; i < clients.length; i++) {
-          clients[i].sendUTF(json);
-        }
-      }
+    if (message.route === "message") {
+      let msg = new Message();
+      msg.message = text;
+      msg.sender_id = currentUser._id;
+      msg.save((err1, res1) => {
+        Message.find({}, (err, res) => {
+          console.log(res);
+          var json = JSON.stringify({ type: "message", data: res });
+          for (var i = 0; i < clients.length; i++) {
+            clients[i].sendUTF(json);
+          }
+        });
+      });
     }
   });
 
   // user disconnected
   connection.on("close", function(connection) {
-    if (userName !== false && userColor !== false) {
-      console.log(
-        new Date() + " Peer " + connection.remoteAddress + " disconnected."
-      );
-      // remove user from the list of connected clients
-      clients.splice(index, 1);
-      // push back user's color to be reused by another user
-      colors.push(userColor);
-    }
+    clients.splice(index, 1);
+    console.log(
+      new Date() + " Peer " + connection.remoteAddress + " disconnected."
+    );
   });
 });

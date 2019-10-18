@@ -6,7 +6,7 @@ import IndexContainer from "./index/index_container";
 import WebsocketContainer from "./websockets/websocket_container";
 
 const App = () => (
-  <div>
+  <div id="RouterSwitch">
     <Switch>
       <AuthRoute path="/signup" component={SessionContainer} />
       <AuthRoute path="/login" component={SessionContainer} />

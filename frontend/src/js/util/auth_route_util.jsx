@@ -20,7 +20,6 @@ const mapStateToProps = state => {
 
   return {
     loggedIn: Boolean(state.session.currentUser)
-    // ||Boolean(localStorage.getItem("sessionToken"))
   };
 };
 

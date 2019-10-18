@@ -1,13 +1,14 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import Chat from "./chat.jsx";
+import Dashboard from "../dashboard/dashboard.jsx";
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      ws: null
+      ws: null,
+      history: []
     };
   }
 
@@ -62,6 +63,17 @@ class Main extends React.Component {
 
       ws.close();
     };
+
+    ws.onmessage = e => {
+      try {
+        var json = JSON.parse(e.data);
+        this.setState({ history: json.data });
+      } catch (e) {
+        console.log("Invalid JSON: ", e.data);
+        return;
+      }
+      console.log(json);
+    };
   }
 
   /**
@@ -74,7 +86,11 @@ class Main extends React.Component {
 
   render() {
     return (
-      <Chat websocket={this.state.ws} currentUser={this.props.currentUser} />
+      <Dashboard
+        history={this.state.history}
+        websocket={this.state.ws}
+        currentUser={this.props.currentUser}
+      />
     );
   }
 }

@@ -6,11 +6,11 @@ const DataSchema = new Schema(
   {
     id: Number,
     message: String,
-    sender: Number,
-    Reciever: Number
+    sender_id: String,
+    thread_id: String
   },
   { timestamps: true }
 );
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model("Data", DataSchema);
+module.exports = mongoose.model("Message", DataSchema);
