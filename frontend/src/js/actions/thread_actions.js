@@ -13,7 +13,7 @@ export const receiveThreads = threads => ({
 });
 
 export const createThread = thread => dispatch =>
-  APIUtil.createThread(thread).then(threads => dispatch(receiveThread(thread)));
+  APIUtil.createThread(thread).then(thread => dispatch(receiveThread(thread)));
 
 export const fetchThreads = () => dispatch =>
   APIUtil.fetchThreads().then(treads => dispatch(receiveThreads(treads)));

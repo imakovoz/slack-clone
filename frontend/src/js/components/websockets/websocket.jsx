@@ -16,7 +16,9 @@ class WebsocketClass extends React.Component {
 
   componentDidMount() {
     this.props.fetchUsers().then(() => {
-      this.connect();
+      this.props.fetchThreads().then(() => {
+        this.connect();
+      });
     });
   }
 
@@ -93,6 +95,7 @@ class WebsocketClass extends React.Component {
         currentUser={this.props.currentUser}
         users={this.props.users}
         createThread={this.props.createThread}
+        threads={this.props.threads}
       />
     );
   }

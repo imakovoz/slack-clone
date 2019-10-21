@@ -15,7 +15,10 @@ class Modal extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.createThread(this.state);
+    this.props.createThread(this.state).then(() => {
+      this.setState({ name: "", description: "" });
+      this.props.updateModal(false);
+    });
   }
 
   handleName(e) {
@@ -33,7 +36,7 @@ class Modal extends React.Component {
       visibility = "flex";
     }
     return (
-      <div id="modal" style={{ display: "flex" }}>
+      <div id="modal" style={{ display: visibility }}>
         <h2>Create Channel</h2>
         <span>
           Channels are where your members communicate. They're best when

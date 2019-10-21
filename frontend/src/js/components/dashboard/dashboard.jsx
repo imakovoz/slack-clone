@@ -22,14 +22,17 @@ class Dashboard extends React.Component {
   }
 
   updateModal(visible) {
-    console.log(visible);
     this.setState({ visible: visible });
   }
 
   render() {
     return (
       <div id="DashboardContainer">
-        <LeftNav updateModal={this.updateModal} modalVis={this.state.visible} />
+        <LeftNav
+          updateModal={this.updateModal}
+          modalVis={this.state.visible}
+          threads={this.props.threads}
+        />
         <ChatHistory
           websocket={this.props.websocket}
           currentUser={this.props.currentUser}
@@ -41,6 +44,7 @@ class Dashboard extends React.Component {
           currentUser={this.props.currentUser}
         />
         <Modal
+          updateModal={this.updateModal}
           visibility={this.state.visible}
           createThread={this.props.createThread}
         />

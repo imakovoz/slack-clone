@@ -19,17 +19,41 @@ class LeftNav extends React.Component {
   }
 
   render() {
-    return (
-      <div id="LeftNav">
-        <div id="newThread">
-          <span>Threads</span>
-          <img
-            src="https://cdn2.iconfinder.com/data/icons/circles-2/100/sign-plus-512.png"
-            onClick={this.addThread}
-          />
+    // console.log(this.props.threads);
+    if (this.props.threads[0]) {
+      return (
+        <div id="LeftNav">
+          <div id="newThread">
+            <span>Threads</span>
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/circles-2/100/sign-plus-512.png"
+              onClick={this.addThread}
+            />
+          </div>
+          <ul id="threadsContainer">
+            {this.props.threads.map((thread, i) => {
+              return (
+                <div className="threadListing" key={i}>
+                  {thread.title}
+                </div>
+              );
+            })}
+          </ul>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div id="LeftNav">
+          <div id="newThread">
+            <span>Threads</span>
+            <img
+              src="https://cdn2.iconfinder.com/data/icons/circles-2/100/sign-plus-512.png"
+              onClick={this.addThread}
+            />
+          </div>
+        </div>
+      );
+    }
   }
 }
 
