@@ -7,6 +7,7 @@ const Data = require("./models/data");
 const mongo_pass = require("../secrets");
 var userRoute = require("./routes/user");
 var authRoute = require("./routes/auth");
+var threadRoute = require("./routes/thread");
 
 const API_PORT = 3001;
 const app = express();
@@ -88,3 +89,4 @@ app.use("/api", router);
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
 userRoute(router);
 authRoute(router);
+threadRoute(router);

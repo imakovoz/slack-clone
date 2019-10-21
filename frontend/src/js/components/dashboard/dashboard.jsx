@@ -40,7 +40,10 @@ class Dashboard extends React.Component {
           websocket={this.props.websocket}
           currentUser={this.props.currentUser}
         />
-        <Modal visibility={this.state.visible} />
+        <Modal
+          visibility={this.state.visible}
+          createThread={this.props.createThread}
+        />
       </div>
     );
   }

@@ -92,6 +92,7 @@ class WebsocketClass extends React.Component {
         websocket={this.state.ws}
         currentUser={this.props.currentUser}
         users={this.props.users}
+        createThread={this.props.createThread}
       />
     );
   }
