@@ -1,0 +1,56 @@
+#modal {
+  z-index: 1;
+  height: 50vh;
+  width: 30vw;
+  background-color: white;
+  position: absolute;
+  margin: 25vh 35vw;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid black;
+}
+
+#modal h2 {
+  color: black;
+}
+
+#modal form {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+}
+
+#modal form * {
+  margin: 5px 0;
+}
+
+#modal form input {
+  border-radius: 5px;
+  padding: 4px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+#modal button {
+  background-color: gray;
+  width: 5rem;
+  border-radius: 5px;
+  line-height: 1.5rem;
+}
+
+#modalSubmitBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+#modal label {
+  color: black;
+}
+
+#modal .subLabel {
+  font-size: 0.7rem;
+  color: #4d4d4d;
+}

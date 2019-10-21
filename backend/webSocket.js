@@ -76,6 +76,18 @@ wsServer.on("request", function(request) {
 
     clients[index].sendUTF(json);
   });
+
+  var sendHistory = setInterval(sendWebsocket, 10000);
+
+  function sendWebsocket() {
+    Message.find({}, (err, res) => {
+      var json = JSON.stringify({ type: "message", data: res });
+      for (var i = 0; i < clients.length; i++) {
+        clients[i].sendUTF(json);
+      }
+    });
+  }
+
   console.log(new Date() + " Connection accepted.");
 
   // user sent some message
@@ -102,6 +114,7 @@ wsServer.on("request", function(request) {
   // user disconnected
   connection.on("close", function(connection) {
     clients.splice(index, 1);
+    clearInterval(sendWebsocket);
     console.log(
       new Date() + " Peer " + connection.remoteAddress + " disconnected."
     );

@@ -15,31 +15,50 @@ class Message extends React.Component {
 
     var interval = Math.floor(seconds / 31536000);
 
-    if (interval > 1) {
-      return interval + " years";
+    if (interval > 0) {
+      if (interval < 2) {
+        return interval + " year";
+      } else {
+        return interval + " years";
+      }
     }
     interval = Math.floor(seconds / 2592000);
-    if (interval > 1) {
-      return interval + " months";
+    if (interval > 0) {
+      if (interval < 2) {
+        return interval + " month";
+      } else {
+        return interval + " months";
+      }
     }
     interval = Math.floor(seconds / 86400);
-    if (interval > 1) {
-      return interval + " days";
+    if (interval > 0) {
+      if (interval < 2) {
+        return interval + " day";
+      } else {
+        return interval + " days";
+      }
     }
     interval = Math.floor(seconds / 3600);
-    if (interval > 1) {
-      return interval + " hours";
+    if (interval > 0) {
+      if (interval < 2) {
+        return interval + " hour";
+      } else {
+        return interval + " hours";
+      }
     }
     interval = Math.floor(seconds / 60);
-    if (interval > 1) {
-      return interval + " minutes";
+    if (interval > 0) {
+      if (interval < 2) {
+        return interval + " minute";
+      } else {
+        return interval + " minutes";
+      }
     }
-    return Math.floor(seconds) + " seconds";
+    return "Less than a minute";
   }
 
   render() {
     if (this.props.messageUser) {
-      console.log(this.timeSince(Date.parse(this.props.messageUser.createdAt)));
       return (
         <div id="message">
           <div id="messageProfPic">
@@ -47,9 +66,12 @@ class Message extends React.Component {
           </div>
           <div id="rightMessageContainer">
             <div id="rightMessageTop">
-              <div id="messageProfile">{this.props.messageUser.firstname}</div>
+              <div id="messageProfile">
+                {this.props.messageUser.firstname}{" "}
+                {this.props.messageUser.lastname}
+              </div>
               <div>
-                {this.timeSince(Date.parse(this.props.messageUser.createdAt))}
+                {this.timeSince(Date.parse(this.props.message.createdAt))} ago
               </div>
             </div>
             <div id="messageText">{this.props.message.message}</div>
