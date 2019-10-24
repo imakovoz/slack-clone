@@ -42,6 +42,7 @@ class LeftNav extends React.Component {
             <img
               src="https://cdn2.iconfinder.com/data/icons/circles-2/100/sign-plus-512.png"
               onClick={this.addThread}
+              id="addThread"
             />
           </div>
           <ul id="threadsContainer">

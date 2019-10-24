@@ -26,7 +26,7 @@ class ChatHistory extends React.Component {
               var messageUser = this.props.users.find(e => {
                 return e._id === message.sender_id;
               });
-              if (message.thread_id === this.props.thread) {
+              if (message.thread_id === this.props.thread._id) {
                 return (
                   <Message
                     currentUser={this.props.currentUser}

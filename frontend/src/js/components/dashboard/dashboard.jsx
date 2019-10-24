@@ -20,8 +20,10 @@ class Dashboard extends React.Component {
   }
 
   updateThread(threadID) {
-    console.log(threadID);
-    this.setState({ thread: threadID });
+    var changedThread = this.props.threads.find(e => {
+      return e._id === threadID;
+    });
+    this.setState({ thread: changedThread });
   }
 
   handleText(e) {
@@ -30,6 +32,12 @@ class Dashboard extends React.Component {
 
   updateModal(visible) {
     this.setState({ visible: visible });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props.threads.length > 0 && this.state.thread === 0) {
+      this.setState({ thread: this.props.threads[0] });
+    }
   }
 
   render() {
