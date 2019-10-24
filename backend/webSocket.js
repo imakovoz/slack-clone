@@ -93,12 +93,13 @@ wsServer.on("request", function(request) {
   // user sent some message
   connection.on("message", function(message) {
     message = JSON.parse(message.utf8Data);
-    var { currentUser, text } = message;
+    var { currentUser, text, thread } = message;
 
     if (message.route === "message") {
       let msg = new Message();
       msg.message = text;
       msg.sender_id = currentUser._id;
+      msg.thread_id = thread;
       msg.save((err1, res1) => {
         Message.find({}, (err, res) => {
           console.log(res);

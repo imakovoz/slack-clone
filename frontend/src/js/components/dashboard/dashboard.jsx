@@ -10,11 +10,18 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       text: "",
-      visible: false
+      visible: false,
+      thread: 0
     };
 
     this.handleText = this.handleText.bind(this);
     this.updateModal = this.updateModal.bind(this);
+    this.updateThread = this.updateThread.bind(this);
+  }
+
+  updateThread(threadID) {
+    console.log(threadID);
+    this.setState({ thread: threadID });
   }
 
   handleText(e) {
@@ -26,6 +33,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    // console.log(this.state.thread);
     return (
       <div id="DashboardContainer">
         <LeftNav
@@ -33,16 +41,19 @@ class Dashboard extends React.Component {
           modalVis={this.state.visible}
           threads={this.props.threads}
           deleteThread={this.props.deleteThread}
+          updateThread={this.updateThread}
         />
         <ChatHistory
           websocket={this.props.websocket}
           currentUser={this.props.currentUser}
           chatHistory={this.props.chatHistory}
           users={this.props.users}
+          thread={this.state.thread}
         />
         <Chat
           websocket={this.props.websocket}
           currentUser={this.props.currentUser}
+          thread={this.state.thread}
         />
         <Modal
           updateModal={this.updateModal}

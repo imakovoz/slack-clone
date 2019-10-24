@@ -20,7 +20,8 @@ class Chat extends React.Component {
       var obj = {
         currentUser: this.props.currentUser,
         text: this.state.text,
-        route: "message"
+        route: "message",
+        thread: this.props.thread
       };
       websocket.send(JSON.stringify(obj)); //send data to the server
       this.setState({ text: "" });

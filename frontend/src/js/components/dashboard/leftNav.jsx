@@ -6,6 +6,7 @@ class LeftNav extends React.Component {
     super(props);
     this.addThread = this.addThread.bind(this);
     this.deleteThread = this.deleteThread.bind(this);
+    this.updateThread = this.updateThread.bind(this);
   }
 
   addThread(e) {
@@ -17,10 +18,18 @@ class LeftNav extends React.Component {
     }
   }
 
+  openThread(e) {
+    e.preventDefault();
+  }
+
   deleteThread(e) {
     e.preventDefault();
     this.props.deleteThread(e.target.className);
     // console.log("initial delete", e.target.className);
+  }
+
+  updateThread(e) {
+    this.props.updateThread(e.target.className);
   }
 
   render() {
@@ -39,7 +48,9 @@ class LeftNav extends React.Component {
             {this.props.threads.map((thread, i) => {
               return (
                 <div className="threadListing" key={i}>
-                  <span># {thread.title}</span>
+                  <span onClick={this.updateThread} className={thread._id}>
+                    # {thread.title}
+                  </span>
                   <span onClick={this.deleteThread} className={thread._id}>
                     X
                   </span>
