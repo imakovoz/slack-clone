@@ -12,6 +12,19 @@ class Modal extends React.Component {
     this.handleName = this.handleName.bind(this);
     this.handleDescription = this.handleDescription.bind(this);
     this.handleContainerClick = this.handleContainerClick.bind(this);
+    this.escFunction = this.escFunction.bind(this);
+  }
+  escFunction(event) {
+    if (event.key === "Escape") {
+      this.setState({ name: "", description: "" });
+      this.props.updateModal(false);
+    }
+  }
+  componentDidMount() {
+    document.addEventListener("keydown", this.escFunction, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.escFunction, false);
   }
 
   handleSubmit(e) {
@@ -24,6 +37,7 @@ class Modal extends React.Component {
 
   handleContainerClick(e) {
     if (e.target.id === "modalContainer") {
+      this.setState({ name: "", description: "" });
       this.props.updateModal(false);
     }
   }

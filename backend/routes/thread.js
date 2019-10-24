@@ -19,4 +19,17 @@ module.exports = function(router) {
       return res.json({ success: true, threads: data });
     });
   });
+
+  router.delete("/threads/:id", (req, res) => {
+    console.log(req.params.id);
+    const id = req.params.id;
+    Thread.findByIdAndRemove(id, err => {
+      if (err) return res.send(err);
+      Thread.find((err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, threads: data });
+      });
+      // return res.json({ success: true });
+    });
+  });
 };

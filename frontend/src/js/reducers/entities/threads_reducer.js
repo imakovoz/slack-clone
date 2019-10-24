@@ -7,7 +7,7 @@ const threadsReducer = (state = {}, action) => {
     case RECEIVE_THREAD:
       return merge({}, state, action.thread.data);
     case RECEIVE_THREADS:
-      return merge({}, state, action.threads.data.threads);
+      return merge({}, action.threads.data.threads);
     default:
       return state;
   }

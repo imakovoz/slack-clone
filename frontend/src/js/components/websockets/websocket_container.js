@@ -1,5 +1,9 @@
 import { fetchUsers } from "../../actions/user_actions";
-import { createThread, fetchThreads } from "../../actions/thread_actions";
+import {
+  createThread,
+  fetchThreads,
+  deleteThread
+} from "../../actions/thread_actions";
 import WebsocketClass from "./websocket.jsx";
 import { connect } from "react-redux";
 
@@ -15,7 +19,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchUsers: users => dispatch(fetchUsers(users)),
     fetchThreads: threads => dispatch(fetchThreads(threads)),
-    createThread: thread => dispatch(createThread(thread))
+    createThread: thread => dispatch(createThread(thread)),
+    deleteThread: id => dispatch(deleteThread(id))
   };
 };
 

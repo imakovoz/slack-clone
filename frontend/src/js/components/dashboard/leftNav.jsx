@@ -5,17 +5,22 @@ class LeftNav extends React.Component {
   constructor(props) {
     super(props);
     this.addThread = this.addThread.bind(this);
+    this.deleteThread = this.deleteThread.bind(this);
   }
 
   addThread(e) {
     e.preventDefault();
-    console.log("modalVis");
-    console.log(this.props.modalVis);
     if (this.props.modalVis) {
       this.props.updateModal(false);
     } else {
       this.props.updateModal(true);
     }
+  }
+
+  deleteThread(e) {
+    e.preventDefault();
+    this.props.deleteThread(e.target.className);
+    // console.log("initial delete", e.target.className);
   }
 
   render() {
@@ -34,7 +39,10 @@ class LeftNav extends React.Component {
             {this.props.threads.map((thread, i) => {
               return (
                 <div className="threadListing" key={i}>
-                  # {thread.title}
+                  <span># {thread.title}</span>
+                  <span onClick={this.deleteThread} className={thread._id}>
+                    X
+                  </span>
                 </div>
               );
             })}

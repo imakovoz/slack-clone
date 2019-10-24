@@ -32,6 +32,7 @@ class Dashboard extends React.Component {
           updateModal={this.updateModal}
           modalVis={this.state.visible}
           threads={this.props.threads}
+          deleteThread={this.props.deleteThread}
         />
         <ChatHistory
           websocket={this.props.websocket}

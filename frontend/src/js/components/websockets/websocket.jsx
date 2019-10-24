@@ -95,6 +95,7 @@ class WebsocketClass extends React.Component {
         currentUser={this.props.currentUser}
         users={this.props.users}
         createThread={this.props.createThread}
+        deleteThread={this.props.deleteThread}
         threads={this.props.threads}
       />
     );
