@@ -21,6 +21,9 @@ class ChatHistory extends React.Component {
     ) {
       return (
         <div id="ChatLogContainer">
+          <div id="ChatLogTitleContainer">
+            <h2>{this.props.thread.title}</h2>
+          </div>
           <ul>
             {this.props.chatHistory.map((message, i) => {
               var messageUser = this.props.users.find(e => {
