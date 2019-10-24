@@ -34,7 +34,7 @@ class LeftNav extends React.Component {
             {this.props.threads.map((thread, i) => {
               return (
                 <div className="threadListing" key={i}>
-                  {thread.title}
+                  # {thread.title}
                 </div>
               );
             })}
