@@ -12,9 +12,8 @@ export const login = user => {
   });
 };
 
-export const logout = () => {
-  return $.ajax({
-    method: "DELETE",
-    url: "http://localhost:3001/api/session"
+export const logout = user => {
+  return axios.post("http://localhost:3001/api/auth/logout", {
+    data: user
   });
 };
